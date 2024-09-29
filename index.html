@@ -5,15 +5,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance Page</title>
-    <link rel="icon" href="./image/ic_bg.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/tienqhph/UIBaoTri/refs/heads/main/image/ic_bg.png"
+        type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-180deg, #202744, #202744);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+            /* Thêm padding để tránh bị cắt góc trên thiết bị di động */
+        }
+
+        .maintenance-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            /* Đảm bảo rằng phần tử luôn vừa với màn hình nhỏ */
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .time {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100px;
+            height: 100px;
+        }
+
+        .image_logo {
+            width: 100px;
+            height: 80px;
+        }
+
+        .time span {
+            font-size: 2rem;
+            display: block;
+        }
+
+        .illustration {
+            margin-top: 30px;
+        }
+
+        .illustration img {
+            width: 100%;
+            max-width: 300px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+
+        /* Responsive CSS cho màn hình nhỏ (máy tính bảng, điện thoại) */
+        @media (max-width: 768px) {
+            .countdown {
+                flex-direction: column;
+            }
+
+            .time {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Responsive CSS cho màn hình điện thoại di động */
+        @media (max-width: 480px) {
+            .maintenance-container {
+                padding: 20px;
+            }
+
+            .time {
+                padding: 15px;
+            }
+
+            .content h1 {
+                font-size: 1.8rem;
+            }
+
+            .illustration img {
+                max-width: 200px;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
     <div class="maintenance-container">
         <div class="logo">
-            <img src="./image/logo.png" alt="Logo Tập Đoàn" class="image_logo" />
+            <img src="https://raw.githubusercontent.com/tienqhph/UIBaoTri/refs/heads/main/image/logo.png"
+                alt="Logo Tập Đoàn" class="image_logo" />
         </div>
         <div class="content">
             <h1>Thông báo bảo trì!</h1>
@@ -39,7 +150,40 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Set the date we're counting down to
+
+        // Set the countdown date to tomorrow's date
+        var countDownDate = new Date("Sep 29 2024 15:00:00 GMT+0700").getTime();
+        // Update the count down every 1 second
+        var countdownfunction = setInterval(function () {
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in the elements with id="days", "hours", "minutes", "seconds"
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(countdownfunction);
+                document.querySelector(".countdown").innerHTML =
+                    "Maintenance is completed!";
+            }
+        }, 1000);
+
+    </script>
 </body>
 
 </html>
